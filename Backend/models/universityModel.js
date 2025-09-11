@@ -14,6 +14,6 @@ export const universityModel = {
   },
   insert: function(u) {
     db.run(`INSERT INTO universities (alpha_two_code, country, state_province, name, domains, web_pages) VALUES (?, ?, ?, ?, ?, ?)`,
-      [u.alpha_two_code, u.country, u["state-province"], u.name, JSON.stringify(u.domains), JSON.stringify(u.web_pages)]);
+      [u.alpha_two_code, u.country.toLowerCase(), u["state-province"], u.name, JSON.stringify(u.domains), JSON.stringify(u.web_pages)]);
   }
 };
