@@ -1,11 +1,14 @@
 import { db } from "../config/database.js";
 
 export const getUniversities = (req, res) => {
-  const { country, name } = req.query;
-  const sql = `SELECT * FROM universities WHERE 
-    (? IS NULL OR country = ?) 
-    AND (? IS NULL OR name LIKE '%' || ? || '%')`;
-  db.all(sql, [country, country, name, name], (err, rows) => {
+  const { country, name, page, limit } = req.query;
+  const sql = `SELECT * FROM universities
+    WHERE 
+        (? IS NULL OR country = ?)
+    AND (? IS NULL OR name LIKE '%' || ? || '%')
+    ORDER BY id
+    LIMIT ? OFFSET ?`;
+  db.all(sql, [country, country, name, name, limit, (page-1)*limit], (err, rows) => {
     if (err) return res.status(500).json({ error: err.message });
     rows.forEach((row) => {
       row.domains = JSON.parse(row.domains);

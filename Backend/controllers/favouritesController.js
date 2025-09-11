@@ -1,7 +1,6 @@
 import { db } from "../config/database.js";
 
 export const addFavourite = (req, res) => {
-    console.log(req.body);
   db.run('INSERT INTO favourites (university_id) VALUES (?)', [req.body.university_id], function(err) {
     if (err) return res.status(500).json({ error: err.message });
     res.json({ id: this.lastID });
@@ -20,7 +19,6 @@ export const getFavourites = (req, res) => {
 };
 
 export const deleteFavourite = (req, res) => {
-    console.log(req.body);
   db.run('DELETE FROM favourites WHERE university_id = ?', [req.body.university_id], function(err) {
     if (err) return res.status(500).json({ error: err.message });
     res.json({ deleted: this.changes });
