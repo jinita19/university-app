@@ -1,0 +1,22 @@
+:root {
+  /* Fonts */
+  --font-body: Arial, Helvetica, sans-serif;
+  --font-heading: 'Times New Roman', Times, serif;
+
+  /* Radius */
+  --radius-sm: 5px;
+  --radius-md: 10px;
+  --radius-lg: 15px;
+
+  /* Text Colors */
+  --color-text: #000000;
+  --color-placeholder-text: #888888;
+
+  /* Blues */
+  --color-blue: #a5d8ff;
+  --color-blue-stroke: #1971c2;
+
+  /* Yellows */
+  --color-yellow: #ffec99;
+  --color-yellow-stroke: #fab005;
+}
