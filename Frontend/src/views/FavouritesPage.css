@@ -1,0 +1,16 @@
+h2 {
+    padding: 10px;
+    margin-bottom: 10px;
+    color: var(--color-blue-stroke);
+    font-size: 1.8rem;
+}
+
+button {
+    margin: 5px 0px;
+}
+
+@media (max-width: 768px) {
+  h2 {
+    font-size: 1.3rem;
+  }
+}

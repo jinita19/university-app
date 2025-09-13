@@ -1,13 +1,56 @@
-.primary-btn {
-  background-color: var(--color-blue);
-  border: 2px solid var(--color-blue-stroke);
-  padding: 10px;
-  font-size: medium;
-  font-weight: bold;
+.btn {
   border-radius: var(--radius-md);
-  text-align: center;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
-.secondary-btn {
+.btn.sm {
+  padding: 4px 10px;
+  font-size: 12px;
+}
 
+.btn.md {
+  padding: 6px 14px;
+  font-size: 14px;
+}
+
+.btn.lg {
+  padding: 10px 18px;
+  font-size: 16px;
+}
+
+/* Primary (Blue) */
+.btn.primary {
+  background-color: var(--color-blue);
+  border: 1px solid var(--color-blue-stroke);
+}
+
+.btn.primary:hover:not(.disabled) {
+  background-color: var(--color-hover-blue);
+}
+
+/* Secondary (Yellow) */
+.btn.secondary {
+  background-color: var(--color-yellow);
+  border: 1px solid var(--color-yellow-stroke);
+}
+
+.btn.secondary:hover:not(.disabled) {
+  background-color: var(--color-hover-yellow);
+}
+
+/* Disabled (Gray) */
+.btn.disabled {
+  background-color: var(--color-gray);
+  border: 1px solid var(--color-gray-stroke);
+  color: #888;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .btn.md {
+    padding: 5px 8px;
+    font-size: 0.75rem;
+  }
 }

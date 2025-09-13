@@ -9,7 +9,6 @@
 body {
   font-family: var(--font-body);
   color: var(--color-text);
-  text-align: center;
 }
 
 .app-container {
