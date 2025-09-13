@@ -13,7 +13,7 @@
   align-items: center;
 }
 
-.api-details{
+.api-details {
   margin: 10px 0px;
   padding: 5px 15px;
   background-color: var(--color-blue);
@@ -27,12 +27,12 @@
   }
 }
 
-.api-details.error-div{
+.api-details.error-div {
   background-color: var(--color-red);
   border-color: var(--color-red-stroke);
 }
 
-.api-details.success-div{
+.api-details.success-div {
   background-color: var(--color-green);
   border-color: var(--color-green-stroke);
 }

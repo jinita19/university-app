@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from "react";
-import { fetchCountries } from "../services/countryService";
-import "./CountryDropdown.css";
-import { useKeyboardNavigation } from "../hooks/useKeyboardNavigation";
-import { SearchInput } from "./common/SearchInput";
+import { useEffect, useRef, useState } from 'react';
+import { fetchCountries } from '../services/countryService';
+import './CountryDropdown.css';
+import { useKeyboardNavigation } from '../hooks/useKeyboardNavigation';
+import { SearchInput } from './common/SearchInput';
 
 type CountryDropdownProps = {
   handleCountrySelect: (country: string) => void;
@@ -23,7 +23,7 @@ export const CountryDropdown: React.FC<CountryDropdownProps> = ({
     fetchCountries()
       .then((data) => setCountries(data))
       .catch((err) => {
-        console.log("Error Fetching Countries", err);
+        console.log('Error Fetching Countries', err);
       });
   }, []);
 
@@ -38,12 +38,12 @@ export const CountryDropdown: React.FC<CountryDropdownProps> = ({
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   const filteredCountries = countries.filter((country) =>
-    country.toLowerCase().includes(input.toLowerCase())
+    country.toLowerCase().includes(input.toLowerCase()),
   );
 
   const handleSuggestionSelect = (suggestion: string) => {
@@ -57,16 +57,16 @@ export const CountryDropdown: React.FC<CountryDropdownProps> = ({
   const { activeIndex, handleKeyDown } = useKeyboardNavigation(
     filteredCountries,
     handleSuggestionSelect,
-    hideTheList
+    hideTheList,
   );
 
   const getHighlightedText = (text: string) => {
     if (!input) return text;
-    const regex = new RegExp(`(${input})`, "gi");
+    const regex = new RegExp(`(${input})`, 'gi');
     const parts = text.split(regex);
 
     return parts.map((part: string, i: number) =>
-      regex.test(part) ? <strong key={i}>{part}</strong> : part
+      regex.test(part) ? <strong key={i}>{part}</strong> : part,
     );
   };
 
@@ -78,8 +78,10 @@ export const CountryDropdown: React.FC<CountryDropdownProps> = ({
         <li
           key={suggestion}
           onClick={() => handleSuggestionSelect(suggestion)}
-          className={index === activeIndex ? "active" : ""}
+          className={index === activeIndex ? 'active' : ''}
           id={`list-index-${index}`}
+          aria-selected={index === activeIndex}
+          role="option"
         >
           {getHighlightedText(suggestion)}
         </li>
@@ -100,15 +102,34 @@ export const CountryDropdown: React.FC<CountryDropdownProps> = ({
 
   return (
     <div className="country-dropdown" ref={dropdownContainerRef}>
+      <label htmlFor="country-select" className="sr-only">
+        Select Country
+      </label>
       <SearchInput
         value={input}
-        id="country-search"
+        id="country-select"
         onChange={handleInputChange}
-        placeholder={"Enter a country"}
+        placeholder={'Enter a country'}
         onFocus={handleFocus}
         onKeyDown={handleKeyDown}
+        accessibilityProps={{
+          role: 'combobox',
+          'aria-controls': 'suggestion-list',
+          'aria-autocomplete': 'list',
+          'aria-expanded': showList,
+          'aria-activedescendant': `list-index-${activeIndex}`,
+        }}
       />
-      {showList && <ul className="suggestion-list">{renderListContent()}</ul>}
+      {showList && (
+        <ul
+          className="suggestion-list"
+          role="listbox"
+          id="suggestion-list"
+          tabIndex={-1}
+        >
+          {renderListContent()}
+        </ul>
+      )}
     </div>
   );
 };

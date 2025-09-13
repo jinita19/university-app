@@ -1,14 +1,14 @@
-import { useNavigate } from "react-router-dom";
-import { Button } from "../components/common/Button";
-import { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import { Button } from '../components/common/Button';
+import { useEffect, useState } from 'react';
 import {
   getFavouriteUniversities,
   removeFavorite,
-} from "../services/favouriteUniService";
-import "./FavouritesPage.css";
-import { DataTable } from "../components/DataTable";
-import type { University } from "../Types/types";
-import { mapUniversityData } from "../helpers";
+} from '../services/favouriteUniService';
+import './FavouritesPage.css';
+import { DataTable } from '../components/DataTable';
+import type { University } from '../types/types';
+import { mapUniversityData } from '../helpers';
 
 const FavouritesPage = () => {
   const navigate = useNavigate();
@@ -22,8 +22,8 @@ const FavouritesPage = () => {
         const list = await getFavouriteUniversities();
         setFavouriteUniList(mapUniversityData(list));
       } catch (error) {
-        setError("Error fetching favourites list");
-        console.error("Error fetching favourites:", error);
+        setError('Error fetching favourites list');
+        console.error('Error fetching favourites:', error);
       } finally {
         setLoading(false);
       }
@@ -34,14 +34,14 @@ const FavouritesPage = () => {
   const handleRemoveRow = async (uniId: number) => {
     const prevData = favouriteUniList;
     setFavouriteUniList((prevList) =>
-      prevList.filter((data: University) => data?.id !== uniId)
+      prevList.filter((data: University) => data?.id !== uniId),
     );
     try {
       await removeFavorite(uniId);
     } catch (err) {
       console.log(
         `Error while removing favourite university with id ${uniId}`,
-        err
+        err,
       );
       setFavouriteUniList(prevData);
     }
@@ -63,7 +63,7 @@ const FavouritesPage = () => {
           />
           <Button
             text="Back To Search"
-            onClick={() => navigate("/search")}
+            onClick={() => navigate('/search')}
             size="lg"
           />
         </>

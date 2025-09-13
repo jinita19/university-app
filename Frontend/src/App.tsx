@@ -1,7 +1,7 @@
-import { Routes, Route } from "react-router-dom";
-import HomePage from "./views/Homepage";
-import FavouritesPage from "./views/FavouritesPage";
-import "../src/styles/global.css";
+import { Routes, Route } from 'react-router-dom';
+import HomePage from './views/Homepage';
+import FavouritesPage from './views/FavouritesPage';
+import '../src/styles/global.css';
 
 function App() {
   return (

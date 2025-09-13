@@ -1,19 +1,19 @@
-import { Button } from "../components/common/Button";
-import { useNavigate } from "react-router-dom";
-import "./HomePage.css";
-import { CountryDropdown } from "../components/CountryDropdown";
-import { SearchInput } from "../components/common/SearchInput";
-import { useEffect, useState } from "react";
-import { useDebounce } from "../hooks/useDebounce";
-import { fetchUniversities } from "../services/universityService";
-import type { ApiData, FetchResult, University } from "../Types/types";
-import { DataTable } from "../components/DataTable";
-import { addFavorite, removeFavorite } from "../services/favouriteUniService";
-import { mapUniversityData, setApiStatus } from "../helpers";
+import { Button } from '../components/common/Button';
+import { useNavigate } from 'react-router-dom';
+import './HomePage.css';
+import { CountryDropdown } from '../components/CountryDropdown';
+import { SearchInput } from '../components/common/SearchInput';
+import { useEffect, useState } from 'react';
+import { useDebounce } from '../hooks/useDebounce';
+import { fetchUniversities } from '../services/universityService';
+import type { ApiData, FetchResult, University } from '../types/types';
+import { DataTable } from '../components/DataTable';
+import { addFavorite, removeFavorite } from '../services/favouriteUniService';
+import { mapUniversityData, setApiStatus } from '../helpers';
 
 const HomePage = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [countryInput, setCountryInput] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
+  const [countryInput, setCountryInput] = useState('');
   const debouncedQuery = useDebounce(searchQuery);
   const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
   const [universityList, setUniversityList] = useState<University[]>([]);
@@ -27,23 +27,22 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!selectedCountry) return;
-    if (debouncedQuery.length >= 2) {
+    if (selectedCountry || (selectedCountry && debouncedQuery.length >= 2)) {
       fetchUniversities(selectedCountry.toLowerCase(), debouncedQuery)
         .then((res) => {
           setUniversityList(mapUniversityData(res.data));
-          setApiStatus("success", setApiData)(res);
+          setApiStatus('success', setApiData)(res);
         })
         .catch((error) => {
-          console.error("Error fetching universities:", error);
-          setApiStatus("error", setApiData)(error);
+          console.error('Error fetching universities:', error);
+          setApiStatus('error', setApiData)(error);
         });
     }
   }, [debouncedQuery, selectedCountry]);
 
   const handleCountrySelect = (country: string) => {
     setSelectedCountry(country);
-    setSearchQuery("");
+    setSearchQuery('');
   };
 
   const handleFavouriteToggle = async (uniId: number) => {
@@ -55,7 +54,7 @@ const HomePage = () => {
           isFavourite:
             data?.id === uniId ? !data.isFavourite : data.isFavourite,
         };
-      })
+      }),
     );
     const wasFavourite = prevData.filter((data) => data.id === uniId)[0]
       ?.isFavourite;
@@ -64,15 +63,15 @@ const HomePage = () => {
       const res = wasFavourite
         ? await removeFavorite(uniId)
         : await addFavorite(uniId);
-      setApiStatus("success", setApiData)(res);
+      setApiStatus('success', setApiData)(res);
     } catch (error) {
       console.log(
         `Error while ${
-          wasFavourite ? "removing" : "adding"
+          wasFavourite ? 'removing' : 'adding'
         } favourite university with id ${uniId}`,
-        error
+        error,
       );
-      setApiStatus("error", setApiData)(error as FetchResult<unknown>);
+      setApiStatus('error', setApiData)(error as FetchResult<unknown>);
       setUniversityList(prevData);
     }
   };
@@ -80,12 +79,15 @@ const HomePage = () => {
   return (
     <div className="app-container">
       <h2 tabIndex={1}>My Favourite Universities</h2>
-      <div className="row-container">
+      <div className="row-container" role="search">
         <CountryDropdown
           input={countryInput}
           setInput={setCountryInput}
           handleCountrySelect={handleCountrySelect}
         />
+        <label htmlFor="search-input" className="sr-only">
+          University Search
+        </label>
         <SearchInput
           value={searchQuery}
           id="search-input"
@@ -93,6 +95,9 @@ const HomePage = () => {
             setSearchQuery(e.target.value)
           }
           placeholder="Enter University Name"
+          accessibilityProps={{
+            role: 'searchbox',
+          }}
         />
       </div>
       <DataTable
@@ -102,13 +107,14 @@ const HomePage = () => {
       <div className="btn-container">
         <Button
           text="Go To Favourites"
-          onClick={() => navigate("/favourites")}
+          ariaLabel="View favourite universities"
+          onClick={() => navigate('/favourites')}
         />
         <Button
           text="Clear Filters"
           onClick={() => {
-            setCountryInput("Canada");
-            setSearchQuery("");
+            setCountryInput('Canada');
+            setSearchQuery('');
           }}
         />
       </div>
@@ -123,8 +129,10 @@ const HomePage = () => {
         {showApiDetails && (
           <div
             className={`api-details ${
-              apiData.isError ? "error-div" : "success-div"
+              apiData.isError ? 'error-div' : 'success-div'
             }`}
+            role="status"
+            aria-live="polite"
           >
             {!apiData.endpoint ? (
               <p>No Api Details Available To Show</p>

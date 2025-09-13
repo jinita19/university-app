@@ -1,5 +1,5 @@
-import { Button } from "./Button";
-import "./Pagination.css";
+import { Button } from './Button';
+import './Pagination.css';
 
 type PaginationProps = {
   currentPage: number;
@@ -19,12 +19,10 @@ export const Pagination: React.FC<PaginationProps> = ({
   onNextClick,
 }) => {
   return (
-    <nav 
-    aria-label="Pagination Navigation"
-    className="pagination">
+    <nav aria-label="Pagination Navigation" className="pagination">
       <label htmlFor="rows-per-page" className="sr-only">
         Rows per page
-    </label>
+      </label>
       <select id="rows-per-page" value={rowsPerPage} onChange={onLimitChange}>
         <option>5</option>
         <option>10</option>

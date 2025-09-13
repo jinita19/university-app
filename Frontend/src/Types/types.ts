@@ -1,4 +1,4 @@
-import type { AxiosResponse } from "axios";
+import type { AxiosResponse } from 'axios';
 
 export type University = {
   id: number;
@@ -14,7 +14,7 @@ export type UniversityData = {
   state_province: string;
   web_pages: string[];
   is_favourite: boolean;
-  country:string;
+  country: string;
   domains: string[];
   alpha_two_code: string;
 };

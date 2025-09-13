@@ -1,7 +1,7 @@
-import "./Button.css";
+import './Button.css';
 
-type ButtonSize = "sm" | "md" | "lg";
-type ButtonType = "primary" | "secondary";
+type ButtonSize = 'sm' | 'md' | 'lg';
+type ButtonType = 'primary' | 'secondary';
 
 type ButtonProps = {
   text: string;
@@ -16,17 +16,17 @@ export const Button: React.FC<ButtonProps> = ({
   text,
   onClick,
   disabled = false,
-  type = "primary",
-  size = "md",
-  ariaLabel
+  type = 'primary',
+  size = 'md',
+  ariaLabel,
 }) => {
   return (
     <button
       disabled={disabled}
       onClick={onClick}
-      aria-disabled={disabled ? "true" : undefined}
+      aria-disabled={disabled ? 'true' : undefined}
       aria-label={ariaLabel}
-      className={`btn ${type} ${size} ${disabled ? "disabled" : ""}`}
+      className={`btn ${type} ${size} ${disabled ? 'disabled' : ''}`}
     >
       {text}
     </button>

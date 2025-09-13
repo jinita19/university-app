@@ -3,7 +3,7 @@ import type {
   FetchResult,
   University,
   UniversityData,
-} from "./Types/types";
+} from './types/types';
 
 export function mapUniversityData(data: UniversityData[]): University[] {
   return data.map((data) => ({
@@ -16,14 +16,14 @@ export function mapUniversityData(data: UniversityData[]): University[] {
 }
 
 export function setApiStatus<T>(
-  from: "success" | "error",
-  setApiData: React.Dispatch<React.SetStateAction<ApiData>>
+  from: 'success' | 'error',
+  setApiData: React.Dispatch<React.SetStateAction<ApiData>>,
 ) {
   return (res: FetchResult<T>) =>
     setApiData({
       endpoint: res.endpoint,
       status: res.statusCode ?? null,
       duration: res.duration,
-      isError: from === "error",
+      isError: from === 'error',
     });
 }

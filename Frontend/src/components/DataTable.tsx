@@ -1,21 +1,21 @@
-import { useEffect, useState } from "react";
-import { Pagination } from "./common/Pagination";
-import { Button } from "./common/Button";
-import "./DataTable.css";
-import type { University } from "../Types/types";
+import { useEffect, useState } from 'react';
+import { Pagination } from './common/Pagination';
+import { Button } from './common/Button';
+import './DataTable.css';
+import type { University } from '../types/types';
 
 type DataTableProps = {
   list: University[];
   handleFavouriteToggle?: (uniId: number) => void;
   handleRemoveFavourite?: (uniId: number) => void;
-  pageType?: "search" | "favourite";
+  pageType?: 'search' | 'favourite';
 };
 
 export const DataTable: React.FC<DataTableProps> = ({
   list,
   handleFavouriteToggle,
   handleRemoveFavourite,
-  pageType = "search",
+  pageType = 'search',
 }) => {
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(5);
@@ -37,7 +37,7 @@ export const DataTable: React.FC<DataTableProps> = ({
 
   return (
     <>
-      <div className="table-container">
+      <div className="table-container" tabIndex={0}>
         <table>
           <caption className="sr-only">List of universities</caption>
           <thead>
@@ -50,16 +50,16 @@ export const DataTable: React.FC<DataTableProps> = ({
           </thead>
           <tbody>
             {!list.length ? (
-              <tr className="no-data-row">
+              <tr className="no-data-row" tabIndex={0}>
                 <td colSpan={4}>No Rows Available</td>
               </tr>
             ) : (
               list.slice(startIndex, endIndex).map((data: University) => {
                 return (
-                  <tr key={data.id}>
+                  <tr key={data.id} tabIndex={0}>
                     <td>{data.name}</td>
-                    <td className={!data.stateProvince ? "na" : ""}>
-                      {data.stateProvince ?? "NA"}
+                    <td className={!data.stateProvince ? 'na' : ''}>
+                      {data.stateProvince ?? 'NA'}
                     </td>
                     <td>
                       {data.webPages?.map((link: string) => {
@@ -80,30 +80,22 @@ export const DataTable: React.FC<DataTableProps> = ({
                     <td>
                       {data.isFavourite ? (
                         <Button
-                          text={"Remove From Favourites"}
+                          text={'Remove From Favourites'}
                           type="secondary"
                           size="sm"
-                          onClick={() => {
-                            if (pageType === "search") {
-                              if (handleFavouriteToggle) {
-                                handleFavouriteToggle(data.id);
-                              }
-                            } else if (handleRemoveFavourite) {
-                              handleRemoveFavourite(data.id);
-                            }
-                          }}
+                          onClick={() =>
+                            pageType === 'search'
+                              ? handleFavouriteToggle?.(data.id)
+                              : handleRemoveFavourite?.(data.id)
+                          }
                           ariaLabel={`Remove ${data.name} from favourites`}
                         />
                       ) : (
                         <Button
                           size="sm"
-                          text={"Add To Favourites"}
+                          text={'Add To Favourites'}
                           ariaLabel={`Add ${data.name} to favourites`}
-                          onClick={() => {
-                            if (handleFavouriteToggle) {
-                              handleFavouriteToggle(data.id);
-                            }
-                          }}
+                          onClick={() => handleFavouriteToggle?.(data.id)}
                         />
                       )}
                     </td>

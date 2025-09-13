@@ -20,6 +20,7 @@ export const getFavourites = (req, res) => {
       rows.forEach((row) => {
         row.domains = JSON.parse(row.domains);
         row.web_pages = JSON.parse(row.web_pages);
+        row.is_favourite = true
       });
       res.json(rows);
     }

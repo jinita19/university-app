@@ -1,15 +1,18 @@
-import axios from "axios";
-import type { ApiCall, FetchResult } from "../Types/types";
+import axios from 'axios';
+import type { ApiCall, FetchResult } from '../types/types';
 
-export const getEndpoint = (url: string | undefined) : string|null => {
+export const getEndpoint = (url: string | undefined): string | null => {
   if (!url) return null;
-  const apiIndex: number = url?.indexOf("/api") as number;
+  const apiIndex: number = url?.indexOf('/api') as number;
   return apiIndex !== -1 ? (url?.substring(apiIndex) as string) : null;
 };
 
-export const getDuration = (startTime: number, endTime: number) : number => endTime - startTime;
+export const getDuration = (startTime: number, endTime: number): number =>
+  endTime - startTime;
 
-export async function performanceTracing<T>(apiCall: ApiCall<T>): Promise<FetchResult<T>> {
+export async function performanceTracing<T>(
+  apiCall: ApiCall<T>,
+): Promise<FetchResult<T>> {
   const startTime = performance.now();
   try {
     const response = await apiCall();

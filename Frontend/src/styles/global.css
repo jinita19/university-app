@@ -20,11 +20,11 @@ body {
 }
 
 h2 {
-    padding: 10px;
-    margin-bottom: 10px;
-    color: var(--color-blue-stroke);
-    font-size: 1.8rem;
-    text-align: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  color: var(--color-blue-stroke);
+  font-size: 1.8rem;
+  text-align: center;
 }
 
 .sr-only {

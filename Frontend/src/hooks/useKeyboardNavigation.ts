@@ -13,7 +13,7 @@ import { useState, useCallback, useEffect } from 'react';
 export const useKeyboardNavigation = (
   suggestions: string[],
   onSelect: (item: string) => void,
-  hideTheList: () => void
+  hideTheList: () => void,
 ) => {
   const [activeIndex, setActiveIndex] = useState<number>(-1);
 
@@ -23,12 +23,12 @@ export const useKeyboardNavigation = (
       switch (e.key) {
         case 'ArrowDown':
           e.preventDefault();
-          setActiveIndex(prev => (prev + 1) % totalSuggestions);
+          setActiveIndex((prev) => (prev + 1) % totalSuggestions);
           break;
         case 'ArrowUp':
           e.preventDefault();
           setActiveIndex(
-            prev => (prev - 1 + totalSuggestions) % totalSuggestions
+            (prev) => (prev - 1 + totalSuggestions) % totalSuggestions,
           );
           break;
         case 'Tab':
@@ -47,7 +47,7 @@ export const useKeyboardNavigation = (
           break;
       }
     },
-    [suggestions, hideTheList, activeIndex, onSelect]
+    [suggestions, hideTheList, activeIndex, onSelect],
   );
 
   // Scroll the highlighted item into view whenever it changes
@@ -57,7 +57,7 @@ export const useKeyboardNavigation = (
       if (element) {
         element.scrollIntoView({
           block: 'nearest',
-          behavior: 'smooth'
+          behavior: 'smooth',
         });
       }
     }
@@ -65,6 +65,6 @@ export const useKeyboardNavigation = (
 
   return {
     activeIndex,
-    handleKeyDown
+    handleKeyDown,
   };
 };

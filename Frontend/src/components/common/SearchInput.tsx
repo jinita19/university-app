@@ -1,4 +1,4 @@
-import './SearchInput.css'
+import './SearchInput.css';
 
 type SearchInputProps = {
   value: string;
@@ -7,6 +7,7 @@ type SearchInputProps = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onFocus?: () => void;
   onKeyDown?: (e: React.KeyboardEvent) => void;
+  accessibilityProps?: React.InputHTMLAttributes<HTMLInputElement>;
 };
 export const SearchInput: React.FC<SearchInputProps> = ({
   value,
@@ -15,6 +16,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
   onChange,
   onKeyDown,
   onFocus = () => {},
+  accessibilityProps = {},
 }) => {
   return (
     <>
@@ -30,6 +32,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
         autoComplete="off"
         autoCapitalize="none"
         autoCorrect="off"
+        {...accessibilityProps}
       />
     </>
   );
