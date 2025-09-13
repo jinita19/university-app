@@ -1,0 +1,39 @@
+.country-dropdown {
+  width: 60%;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #999;
+  border-radius: var(--radius-md);
+  outline: none;
+  font-size: 14px;
+  box-shadow: 0 1px 6px rgba(40, 40, 40, 0.3);
+  position: relative;
+}
+
+.suggestion-list {
+  position: absolute;
+  z-index: 10;
+  background: white;
+  border: 1px solid #999;
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  max-height: 25%;
+  overflow-y: auto;
+  margin-top: -8px;
+  list-style: none;
+  width: 42%;
+  padding: 5px;
+}
+
+.suggestion-list li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestion-list li.active,
+li:hover {
+  background-color: #f0f0f0;
+}

@@ -1,8 +1,8 @@
 import { useState } from "react";
-import type { University } from "../views/FavouritesPage";
-import { Pagination } from "./Pagination";
+import { Pagination } from "./common/Pagination";
 import { Button } from "./common/Button";
 import "./DataTable.css";
+import type { University } from "../Types/universityTypes";
 
 type DataTableProps = {
   list: University[];
@@ -33,7 +33,7 @@ export const DataTable: React.FC<DataTableProps> = ({
     <>
       <div className="table-container">
         <table>
-          <caption>List of universities</caption>
+          <caption className="sr-only">List of universities</caption>
           <thead>
             <tr>
               <th scope="col">Name</th>

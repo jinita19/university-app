@@ -1,5 +1,8 @@
 .row-container {
   display: flex;
-  gap: 10px;
+  gap: 20px;
   padding: 10px 0px;
+  /* flex-direction: column; */
+  width: 70%;
+  align-items: center;
 }
