@@ -1,15 +1,5 @@
 .country-dropdown {
-  width: 60%;
-}
-
-.search-input {
   width: 100%;
-  padding: 12px;
-  border: 1px solid #999;
-  border-radius: var(--radius-md);
-  outline: none;
-  font-size: 14px;
-  box-shadow: 0 1px 6px rgba(40, 40, 40, 0.3);
   position: relative;
 }
 
@@ -20,11 +10,11 @@
   border: 1px solid #999;
   border-top: none;
   border-radius: 0 0 10px 10px;
-  max-height: 25%;
+  max-height: 220px;
   overflow-y: auto;
   margin-top: -8px;
   list-style: none;
-  width: 42%;
+  width: 100%;
   padding: 5px;
 }
 

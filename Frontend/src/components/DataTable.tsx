@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Pagination } from "./common/Pagination";
 import { Button } from "./common/Button";
 import "./DataTable.css";
-import type { University } from "../Types/universityTypes";
+import type { University } from "../Types/types";
 
 type DataTableProps = {
   list: University[];
@@ -24,6 +24,12 @@ export const DataTable: React.FC<DataTableProps> = ({
   const startIndex = page * rowsPerPage;
   const endIndex = startIndex + rowsPerPage;
 
+  useEffect(() => {
+    if (page > totalPages - 1) {
+      setPage(0);
+    }
+  }, [totalPages, page]);
+
   const onPageLimitChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setRowsPerPage(Number(e.target.value));
     setPage(0);
@@ -43,55 +49,68 @@ export const DataTable: React.FC<DataTableProps> = ({
             </tr>
           </thead>
           <tbody>
-            {list.slice(startIndex, endIndex).map((data: University) => {
-              return (
-                <tr key={data.id}>
-                  <td>{data.name}</td>
-                  <td className={!data.state_province ? "na" : ""}>
-                    {data.state_province ?? "NA"}
-                  </td>
-                  <td>
-                    {data.web_pages.map((link: string) => {
-                      return (
-                        <a
-                          target="_blank"
-                          key={data.name}
-                          rel="noopener noreferrer"
-                          aria-label={`Visit ${data.name} website`}
-                          href={link}
-                        >
-                          {link}
-                        </a>
-                      );
-                    })}
-                  </td>
-                  <td>
-                    {data.isFavourite ? (
-                      <Button
-                        text={"Remove From Favourites"}
-                        type="secondary"
-                        onClick={() => {
-                          if (pageType === "search") {
+            {!list.length ? (
+              <tr className="no-data-row">
+                <td colSpan={4}>No Rows Available</td>
+              </tr>
+            ) : (
+              list.slice(startIndex, endIndex).map((data: University) => {
+                return (
+                  <tr key={data.id}>
+                    <td>{data.name}</td>
+                    <td className={!data.stateProvince ? "na" : ""}>
+                      {data.stateProvince ?? "NA"}
+                    </td>
+                    <td>
+                      {data.webPages?.map((link: string) => {
+                        return (
+                          <a
+                            target="_blank"
+                            key={`${data.id}-${link.toLowerCase()}`}
+                            rel="noopener noreferrer"
+                            className="link"
+                            aria-label={`Visit ${data.name} website`}
+                            href={link}
+                          >
+                            {link}
+                          </a>
+                        );
+                      })}
+                    </td>
+                    <td>
+                      {data.isFavourite ? (
+                        <Button
+                          text={"Remove From Favourites"}
+                          type="secondary"
+                          size="sm"
+                          onClick={() => {
+                            if (pageType === "search") {
+                              if (handleFavouriteToggle) {
+                                handleFavouriteToggle(data.id);
+                              }
+                            } else if (handleRemoveFavourite) {
+                              handleRemoveFavourite(data.id);
+                            }
+                          }}
+                          ariaLabel={`Remove ${data.name} from favourites`}
+                        />
+                      ) : (
+                        <Button
+                          size="sm"
+                          text={"Add To Favourites"}
+                          ariaLabel={`Add ${data.name} to favourites`}
+                          onClick={() => {
                             if (handleFavouriteToggle) {
                               handleFavouriteToggle(data.id);
                             }
-                          } else if (handleRemoveFavourite) {
-                            handleRemoveFavourite(data.id);
-                          }
-                        }}
-                        ariaLabel={`Remove ${data.name} from favourites`}
-                      />
-                    ) : (
-                      <Button
-                        text={"Add To Favourites"}
-                        ariaLabel={`Add ${data.name} to favourites`}
-                        onClick={() => {}}
-                      />
-                    )}
-                  </td>
-                </tr>
-              );
-            })}
+                          }}
+                        />
+                      )}
+                    </td>
+                  </tr>
+                );
+              })
+            )}
           </tbody>
         </table>
       </div>

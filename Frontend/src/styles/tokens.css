@@ -25,4 +25,12 @@
   /* Grays */
   --color-gray: #f5f5f5;
   --color-gray-stroke: #999;
+
+  /* Greens */
+  --color-green: #ace1af;
+  --color-green-stroke: #2f9e44;
+
+  /* Reds */
+  --color-red: #ffc9c9;
+  --color-red-stroke: #e03131;
 }

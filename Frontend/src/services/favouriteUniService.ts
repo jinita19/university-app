@@ -1,11 +1,16 @@
 import axios from 'axios';
+import { performanceTracing } from './helpers';
 
-export const addFavorite = async (uniId: string) => {
-  return axios.post(`http://localhost:5001/api/favourites/${uniId}`);
+export const addFavorite = (uniId: number) => {
+  return performanceTracing(() => 
+    axios.post(`http://localhost:5001/api/favourites/${uniId}`)
+  );
 };
 
 export const removeFavorite = async (uniId: number) => {
-  return axios.delete(`http://localhost:5001/api/favourites/${uniId}`);
+  return performanceTracing(() => 
+    axios.delete(`http://localhost:5001/api/favourites/${uniId}`)
+  );
 };
 
 export const getFavouriteUniversities = async () => {

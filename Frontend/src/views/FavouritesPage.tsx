@@ -7,7 +7,8 @@ import {
 } from "../services/favouriteUniService";
 import "./FavouritesPage.css";
 import { DataTable } from "../components/DataTable";
-import type { University } from "../Types/universityTypes";
+import type { University } from "../Types/types";
+import { mapUniversityData } from "../helpers";
 
 const FavouritesPage = () => {
   const navigate = useNavigate();
@@ -19,17 +20,7 @@ const FavouritesPage = () => {
     const fetchData = async () => {
       try {
         const list = await getFavouriteUniversities();
-        setFavouriteUniList(
-          list.map((data: University) => {
-            return {
-              id: data.id,
-              name: data.name,
-              state_province: data.state_province,
-              web_pages: data.web_pages,
-              isFavourite: true,
-            };
-          })
-        );
+        setFavouriteUniList(mapUniversityData(list));
       } catch (error) {
         setError("Error fetching favourites list");
         console.error("Error fetching favourites:", error);

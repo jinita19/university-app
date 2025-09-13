@@ -2,7 +2,43 @@
   display: flex;
   gap: 20px;
   padding: 10px 0px;
-  /* flex-direction: column; */
   width: 70%;
   align-items: center;
+}
+
+.btn-container {
+  display: flex;
+  gap: 10px;
+  padding: 10px 0px;
+  align-items: center;
+}
+
+.api-details{
+  margin: 10px 0px;
+  padding: 5px 15px;
+  background-color: var(--color-blue);
+  border: 1px solid var(--color-blue-stroke);
+  border-radius: var(--radius-md);
+  p {
+    margin: 3px 0px;
+    b {
+      margin-right: 5px;
+    }
+  }
+}
+
+.api-details.error-div{
+  background-color: var(--color-red);
+  border-color: var(--color-red-stroke);
+}
+
+.api-details.success-div{
+  background-color: var(--color-green);
+  border-color: var(--color-green-stroke);
+}
+
+@media (max-width: 768px) {
+  .row-container {
+    width: 90%;
+  }
 }

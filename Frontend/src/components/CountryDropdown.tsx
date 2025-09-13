@@ -2,9 +2,19 @@ import { useEffect, useRef, useState } from "react";
 import { fetchCountries } from "../services/countryService";
 import "./CountryDropdown.css";
 import { useKeyboardNavigation } from "../hooks/useKeyboardNavigation";
+import { SearchInput } from "./common/SearchInput";
 
-export const CountryDropdown: React.FC = () => {
-  const [input, setInput] = useState("");
+type CountryDropdownProps = {
+  handleCountrySelect: (country: string) => void;
+  input: string;
+  setInput: (value: string) => void;
+};
+
+export const CountryDropdown: React.FC<CountryDropdownProps> = ({
+  handleCountrySelect,
+  input,
+  setInput,
+}) => {
   const [countries, setCountries] = useState<string[]>([]);
   const [showList, setShowList] = useState<boolean>(false);
   const dropdownContainerRef = useRef<HTMLDivElement>(null);
@@ -38,6 +48,7 @@ export const CountryDropdown: React.FC = () => {
 
   const handleSuggestionSelect = (suggestion: string) => {
     setInput(suggestion);
+    handleCountrySelect(suggestion);
     setShowList(false);
   };
 
@@ -89,18 +100,13 @@ export const CountryDropdown: React.FC = () => {
 
   return (
     <div className="country-dropdown" ref={dropdownContainerRef}>
-      <input
-        type="text"
+      <SearchInput
         value={input}
-        id="search"
-        className="search-input"
-        placeholder={"Enter a country"}
+        id="country-search"
         onChange={handleInputChange}
+        placeholder={"Enter a country"}
         onFocus={handleFocus}
         onKeyDown={handleKeyDown}
-        autoComplete="off"
-        autoCapitalize="none"
-        autoCorrect="off"
       />
       {showList && <ul className="suggestion-list">{renderListContent()}</ul>}
     </div>
