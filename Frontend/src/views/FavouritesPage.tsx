@@ -52,7 +52,7 @@ const FavouritesPage = () => {
 
   return (
     <div className="app-container">
-      <h2>My Favourite Universities</h2>
+      <h2 tabIndex={1}>My Favourite Universities</h2>
       <DataTable list={favouriteUniList} handleRemoveFavourite={handleRemoveRow} pageType="favourite"/>
       <Button text="Back To Search" onClick={() => navigate("/search")} size='lg'/>
     </div>

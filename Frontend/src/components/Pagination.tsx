@@ -19,8 +19,13 @@ export const Pagination: React.FC<PaginationProps> = ({
   onNextClick,
 }) => {
   return (
-    <div className="pagination">
-      <select value={rowsPerPage} onChange={onLimitChange}>
+    <nav 
+    aria-label="Pagination Navigation"
+    className="pagination">
+      <label htmlFor="rows-per-page" className="sr-only">
+        Rows per page
+    </label>
+      <select id="rows-per-page" value={rowsPerPage} onChange={onLimitChange}>
         <option>5</option>
         <option>10</option>
         <option>15</option>
@@ -31,7 +36,7 @@ export const Pagination: React.FC<PaginationProps> = ({
         size="sm"
         disabled={currentPage === 0}
       />
-      <span className="page-info">
+      <span className="page-info" aria-live="polite">
         {currentPage + 1} of {totalPages}
       </span>
       <Button
@@ -40,6 +45,6 @@ export const Pagination: React.FC<PaginationProps> = ({
         size="sm"
         disabled={currentPage === totalPages - 1}
       />
-    </div>
+    </nav>
   );
 };

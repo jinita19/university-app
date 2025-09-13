@@ -9,6 +9,7 @@ type ButtonProps = {
   disabled?: boolean;
   type?: ButtonType;
   size?: ButtonSize;
+  ariaLabel?: string;
 };
 
 export const Button: React.FC<ButtonProps> = ({
@@ -17,11 +18,14 @@ export const Button: React.FC<ButtonProps> = ({
   disabled = false,
   type = "primary",
   size = "md",
+  ariaLabel
 }) => {
   return (
     <button
       disabled={disabled}
       onClick={onClick}
+      aria-disabled={disabled ? "true" : undefined}
+      aria-label={ariaLabel}
       className={`btn ${type} ${size} ${disabled ? "disabled" : ""}`}
     >
       {text}

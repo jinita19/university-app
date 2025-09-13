@@ -33,12 +33,13 @@ export const DataTable: React.FC<DataTableProps> = ({
     <>
       <div className="table-container">
         <table>
+          <caption>List of universities</caption>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>State/Province</th>
-              <th>Web Pages</th>
-              <th></th>
+              <th scope="col">Name</th>
+              <th scope="col">State/Province</th>
+              <th scope="col">Web Pages</th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
@@ -52,7 +53,13 @@ export const DataTable: React.FC<DataTableProps> = ({
                   <td>
                     {data.web_pages.map((link: string) => {
                       return (
-                        <a target="_blank" href={link}>
+                        <a
+                          target="_blank"
+                          key={data.name}
+                          rel="noopener noreferrer"
+                          aria-label={`Visit ${data.name} website`}
+                          href={link}
+                        >
                           {link}
                         </a>
                       );
@@ -72,9 +79,14 @@ export const DataTable: React.FC<DataTableProps> = ({
                             handleRemoveFavourite(data.id);
                           }
                         }}
+                        ariaLabel={`Remove ${data.name} from favourites`}
                       />
                     ) : (
-                      <Button text={"Add To Favourites"} onClick={() => {}} />
+                      <Button
+                        text={"Add To Favourites"}
+                        ariaLabel={`Add ${data.name} to favourites`}
+                        onClick={() => {}}
+                      />
                     )}
                   </td>
                 </tr>
@@ -83,7 +95,6 @@ export const DataTable: React.FC<DataTableProps> = ({
           </tbody>
         </table>
       </div>
-
       <Pagination
         currentPage={page}
         totalPages={totalPages}
