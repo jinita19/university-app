@@ -8,7 +8,6 @@ import { useState, useCallback, useEffect } from 'react';
  * @returns
  *  activeIndex: In a list shows which data is active
  *  handleKeyDown: Main function which handles all the necessary key operations
- *  resetHighlight: forcefully remove the active index
  */
 export const useKeyboardNavigation = (
   suggestions: string[],

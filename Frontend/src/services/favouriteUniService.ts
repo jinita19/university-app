@@ -15,7 +15,7 @@ export const removeFavorite = async (uniId: number) => {
 
 export const getFavouriteUniversities = async () => {
   try {
-    const response = await axios(`http://localhost:5001/api/favourites`);
+    const response = await axios.get(`http://localhost:5001/api/favourites`);
     return response.data;
   } catch (err) {
     console.log(err);
