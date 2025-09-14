@@ -24,6 +24,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
         type="text"
         value={value}
         id={id}
+        data-testid="search-input"
         className="search-input"
         placeholder={placeholder}
         onChange={onChange}

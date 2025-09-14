@@ -26,6 +26,7 @@ export const Button: React.FC<ButtonProps> = ({
       onClick={onClick}
       aria-disabled={disabled ? 'true' : undefined}
       aria-label={ariaLabel}
+      data-testid="button"
       className={`btn ${type} ${size} ${disabled ? 'disabled' : ''}`}
     >
       {text}
