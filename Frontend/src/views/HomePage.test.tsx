@@ -6,7 +6,7 @@ import {
   waitFor,
   act,
 } from '@testing-library/react';
-import HomePage from './HomePage';
+import HomePage from './Homepage';
 import { fetchUniversities } from '../services/universityService';
 import * as favUniService from '../services/favouriteUniService';
 

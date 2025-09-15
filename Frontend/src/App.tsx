@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
-import HomePage from './views/Homepage';
 import FavouritesPage from './views/FavouritesPage';
+import HomePage from './views/Homepage';
 import '../src/styles/global.css';
 
 function App() {

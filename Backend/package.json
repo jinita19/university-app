@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "prestart": "node dbsetup.js",
+    "start": "npm run prestart && node index.js",
     "dev": "nodemon index.js"
   },
   "keywords": [],
