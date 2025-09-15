@@ -78,7 +78,7 @@ const HomePage = () => {
 
   return (
     <div className="app-container">
-      <h2 tabIndex={1}>My Favourite Universities</h2>
+      <h2 tabIndex={1}>Search Your University</h2>
       <div className="row-container" role="search">
         <CountryDropdown
           input={countryInput}
@@ -112,8 +112,10 @@ const HomePage = () => {
         />
         <Button
           text="Clear Filters"
+          disabled={!countryInput}
           onClick={() => {
             setCountryInput('Canada');
+            setSelectedCountry('Canada');
             setSearchQuery('');
           }}
         />

@@ -1,6 +1,11 @@
 import axios from 'axios';
 import type { ApiCall, FetchResult } from '../types/types';
 
+// API base URL configuration for Docker environment
+export const getApiUrl = (endpoint: string): string => {
+  return endpoint.startsWith('/api') ? endpoint : `/api${endpoint}`;
+};
+
 export const getEndpoint = (url: string | undefined): string | null => {
   if (!url) return null;
   const apiIndex: number = url?.indexOf('/api') as number;

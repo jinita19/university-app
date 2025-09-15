@@ -11,9 +11,7 @@ describe('fetchCountries', () => {
 
     const result = await fetchCountries();
     expect(result).toBe(mockData);
-    expect(mockedAxios.get).toHaveBeenCalledWith(
-      ' http://localhost:5001/api/countries',
-    );
+    expect(mockedAxios.get).toHaveBeenCalledWith('/api/countries');
   });
 
   it('throws error when API call fails', async () => {

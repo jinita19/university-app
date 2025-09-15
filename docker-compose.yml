@@ -1,15 +1,13 @@
-version: '3.8'
+version: "3.8"
 services:
   frontend:
-    build: ./frontend
+    build: ./Frontend
     ports:
       - "3000:3000"
     depends_on:
       - backend
 
   backend:
-    build: ./backend
-    ports:
-      - "5001:5001"
+    build: ./Backend
     volumes:
-      - ./backend/db:/app/db 
+      - ./Backend/db:/app/db

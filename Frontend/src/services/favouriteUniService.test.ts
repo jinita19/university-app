@@ -4,17 +4,21 @@ import {
   removeFavorite,
   getFavouriteUniversities,
 } from './favouriteUniService';
-import { performanceTracing } from './helpers';
+import { performanceTracing, getApiUrl } from './helpers';
 
 jest.mock('axios');
 jest.mock('./helpers');
 
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 const mockedPerformanceTracing = performanceTracing as jest.Mock;
+const mockedGetApiUrl = getApiUrl as jest.Mock;
 
 describe('Favorites service functions', () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    mockedGetApiUrl.mockImplementation((endpoint: string) =>
+      endpoint.startsWith('/api') ? endpoint : `/api${endpoint}`,
+    );
   });
 
   it('calls addFavorite with correct URL', async () => {
@@ -27,9 +31,7 @@ describe('Favorites service functions', () => {
     await addFavorite(uniId);
 
     expect(performanceTracing).toHaveBeenCalledWith(expect.any(Function));
-    expect(mockedAxios.post).toHaveBeenCalledWith(
-      'http://localhost:5001/api/favourites/3',
-    );
+    expect(mockedAxios.post).toHaveBeenCalledWith('/api/favourites/3');
   });
 
   it('calls removeFavorite with correct URL', async () => {
@@ -42,9 +44,7 @@ describe('Favorites service functions', () => {
     await removeFavorite(uniId);
 
     expect(performanceTracing).toHaveBeenCalledWith(expect.any(Function));
-    expect(mockedAxios.delete).toHaveBeenCalledWith(
-      'http://localhost:5001/api/favourites/7',
-    );
+    expect(mockedAxios.delete).toHaveBeenCalledWith('/api/favourites/7');
   });
 
   it('calls getFavouriteUniversities: returns data on success', async () => {
@@ -54,8 +54,6 @@ describe('Favorites service functions', () => {
     const result = await getFavouriteUniversities();
 
     expect(result).toEqual(mockData);
-    expect(mockedAxios.get).toHaveBeenCalledWith(
-      'http://localhost:5001/api/favourites',
-    );
+    expect(mockedAxios.get).toHaveBeenCalledWith('/api/favourites');
   });
 });

@@ -1,16 +1,20 @@
 import axios from 'axios';
 import { fetchUniversities } from './universityService';
-import { performanceTracing } from './helpers';
+import { performanceTracing, getApiUrl } from './helpers';
 
 jest.mock('axios');
 jest.mock('./helpers');
 
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 const mockedPerformanceTracing = performanceTracing as jest.Mock;
+const mockedGetApiUrl = getApiUrl as jest.Mock;
 
 describe('University service functions', () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    mockedGetApiUrl.mockImplementation((endpoint: string) =>
+      endpoint.startsWith('/api') ? endpoint : `/api${endpoint}`,
+    );
   });
 
   it('calls fetchUniversity with correct URL', async () => {
@@ -24,7 +28,7 @@ describe('University service functions', () => {
 
     expect(performanceTracing).toHaveBeenCalledWith(expect.any(Function));
     expect(mockedAxios.get).toHaveBeenCalledWith(
-      `http://localhost:5001/api/universities?country=${country}&name=${name}`,
+      `/api/universities?country=${country}&name=${name}`,
     );
   });
 });
