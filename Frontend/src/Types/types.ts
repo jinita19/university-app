@@ -3,7 +3,7 @@ import type { AxiosResponse } from 'axios';
 export type University = {
   id: number;
   name: string;
-  stateProvince: string;
+  stateProvince: string | null;
   webPages: string[];
   isFavourite: boolean;
 };

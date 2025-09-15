@@ -14,7 +14,9 @@ describe('Button Component', () => {
   });
 
   it('renders as disabled', () => {
-    const screen = render(<Button text="Disabled" onClick={() => {}} disabled />);
+    const screen = render(
+      <Button text="Disabled" onClick={() => {}} disabled />,
+    );
     const button = screen.getByTestId('button');
     expect(button).toBeDisabled();
     expect(button).toHaveClass('disabled');
@@ -30,15 +32,22 @@ describe('Button Component', () => {
   });
 
   it('sets correct aria-label', () => {
-    const screen = render(<Button text="Click Me" onClick={() => {}} ariaLabel="Click to perform an action" />);
+    const screen = render(
+      <Button
+        text="Click Me"
+        onClick={() => {}}
+        ariaLabel="Click to perform an action"
+      />,
+    );
     const button = screen.getByTestId('button');
     expect(button).toHaveAttribute('aria-label', 'Click to perform an action');
   });
 
   it('applies correct size and type classes', () => {
-    const screen = render(<Button text="Click Me" onClick={() => {}} type="secondary" size="lg" />);
+    const screen = render(
+      <Button text="Click Me" onClick={() => {}} type="secondary" size="lg" />,
+    );
     const button = screen.getByTestId('button');
     expect(button).toHaveClass('btn secondary lg');
   });
-
 });

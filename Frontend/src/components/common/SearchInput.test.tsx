@@ -48,7 +48,7 @@ describe('Search Input Component', () => {
       accessibilityProps: { role: 'searchbox' },
     };
     render(<SearchInput {...inputAriaProps} />);
-    
+
     expect(screen.getByRole('searchbox')).toBeInTheDocument();
   });
 });

@@ -22,8 +22,8 @@ describe('Pagination Component', () => {
   });
 
   test('calls correct callbacks when Prev/Next button clicked', () => {
-    const paginationProps = {...mockProps, currentPage: 2};
-    render(<Pagination  {...paginationProps}/>);
+    const paginationProps = { ...mockProps, currentPage: 2 };
+    render(<Pagination {...paginationProps} />);
     fireEvent.click(screen.getByText('<< Prev'));
     expect(mockProps.onPrevClick).toHaveBeenCalled();
     fireEvent.click(screen.getByText('Next >>'));

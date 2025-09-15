@@ -37,7 +37,7 @@ export const DataTable: React.FC<DataTableProps> = ({
 
   return (
     <>
-      <div className="table-container" tabIndex={0}>
+      <div className="table-container" tabIndex={0} data-testid="datatable">
         <table>
           <caption className="sr-only">List of universities</caption>
           <thead>

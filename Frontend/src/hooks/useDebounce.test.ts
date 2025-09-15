@@ -12,7 +12,7 @@ describe('useDebounce', () => {
   it('should update the value after delay', () => {
     const { result, rerender } = renderHook(
       ({ value, delay }) => useDebounce(value, delay),
-      { initialProps: { value: 'abc', delay: 200 } }
+      { initialProps: { value: 'abc', delay: 200 } },
     );
 
     rerender({ value: 'def', delay: 200 });

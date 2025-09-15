@@ -13,7 +13,7 @@ describe('useFetchSuggestions', () => {
 
   it('should move to next element in list when arrow down key is pressed', async () => {
     const { result } = renderHook(() =>
-      useKeyboardNavigation(['a', 'b', 'c'], onSelect, hideTheList)
+      useKeyboardNavigation(['a', 'b', 'c'], onSelect, hideTheList),
     );
 
     expect(result.current.activeIndex).toBe(-1);
@@ -21,7 +21,7 @@ describe('useFetchSuggestions', () => {
     act(() => {
       result.current.handleKeyDown({
         key: 'ArrowDown',
-        preventDefault: jest.fn()
+        preventDefault: jest.fn(),
       } as any);
     });
 
@@ -30,13 +30,13 @@ describe('useFetchSuggestions', () => {
 
   it('should move to previous element in list when arrow up key is pressed', async () => {
     const { result } = renderHook(() =>
-      useKeyboardNavigation(['a', 'b', 'c'], onSelect, hideTheList)
+      useKeyboardNavigation(['a', 'b', 'c'], onSelect, hideTheList),
     );
 
     act(() => {
       result.current.handleKeyDown({
         key: 'ArrowDown',
-        preventDefault: jest.fn()
+        preventDefault: jest.fn(),
       } as any);
     });
 
@@ -45,7 +45,7 @@ describe('useFetchSuggestions', () => {
     act(() => {
       result.current.handleKeyDown({
         key: 'ArrowUp',
-        preventDefault: jest.fn()
+        preventDefault: jest.fn(),
       } as any);
     });
 
@@ -55,12 +55,12 @@ describe('useFetchSuggestions', () => {
 
   it('should call hide the list when tab is pressed', async () => {
     const { result } = renderHook(() =>
-      useKeyboardNavigation(['a', 'b', 'c'], onSelect, hideTheList)
+      useKeyboardNavigation(['a', 'b', 'c'], onSelect, hideTheList),
     );
 
     act(() => {
       result.current.handleKeyDown({
-        key: 'Tab'
+        key: 'Tab',
       } as any);
     });
 
@@ -69,13 +69,13 @@ describe('useFetchSuggestions', () => {
 
   it('should call hide the list and reset the index when escape is pressed', async () => {
     const { result } = renderHook(() =>
-      useKeyboardNavigation(['a', 'b', 'c'], onSelect, hideTheList)
+      useKeyboardNavigation(['a', 'b', 'c'], onSelect, hideTheList),
     );
 
     act(() => {
       result.current.handleKeyDown({
         key: 'Escape',
-        preventDefault: jest.fn()
+        preventDefault: jest.fn(),
       } as any);
     });
 
@@ -85,13 +85,13 @@ describe('useFetchSuggestions', () => {
 
   it('should not do nothing when enter key is pressed and no index is highlighted', async () => {
     const { result } = renderHook(() =>
-      useKeyboardNavigation(['a', 'b', 'c'], onSelect, hideTheList)
+      useKeyboardNavigation(['a', 'b', 'c'], onSelect, hideTheList),
     );
 
     act(() => {
       result.current.handleKeyDown({
         key: 'Enter',
-        preventDefault: jest.fn()
+        preventDefault: jest.fn(),
       } as any);
     });
 
@@ -100,13 +100,13 @@ describe('useFetchSuggestions', () => {
 
   it('should call select with correct element when enter key is pressed and index is highlighted', async () => {
     const { result } = renderHook(() =>
-      useKeyboardNavigation(['a', 'b', 'c'], onSelect, hideTheList)
+      useKeyboardNavigation(['a', 'b', 'c'], onSelect, hideTheList),
     );
 
     act(() => {
       result.current.handleKeyDown({
         key: 'ArrowDown',
-        preventDefault: jest.fn()
+        preventDefault: jest.fn(),
       } as any);
     });
 
@@ -115,7 +115,7 @@ describe('useFetchSuggestions', () => {
     act(() => {
       result.current.handleKeyDown({
         key: 'Enter',
-        preventDefault: jest.fn()
+        preventDefault: jest.fn(),
       } as any);
     });
 
